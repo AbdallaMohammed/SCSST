@@ -15,12 +15,12 @@ def main():
         style_transfer_pipeline(load_vgg_model(), content_image, style_image, output_image=generated_image)
 
     mask = segmentation_pipeline(load_u2net_model(), content_image, output_image=mask_image)
-    # saliency_map = saliency_map_pipeline(
-    #     load_u2net_model(out_ch=1, checkpoint=U2NET_SALIENCY_MAP_CHECKPOINT_FILE, ordered_dict=False),
-    #     content_image,
-    #     output_image=saliency_image
-    # )
-    # merge_images_pipeline(mask, saliency_map, content_image, generated_image, output_image=output_image)
+    saliency_map = saliency_map_pipeline(
+        load_u2net_model(out_ch=1, checkpoint=U2NET_SALIENCY_MAP_CHECKPOINT_FILE, ordered_dict=False),
+        content_image,
+        output_image=saliency_image
+    )
+    merge_images_pipeline(mask, saliency_map, content_image, generated_image, output_image=output_image)
 
 
 if __name__ == '__main__':
